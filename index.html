@@ -7,9 +7,23 @@
   <title>Document</title>
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-900">
-    <h1 class="text-white text-xl bg-gray-900">
-        Hola
-    </h1>
+<body
+    class="bg-transparent p-4 flex"
+>
+    <div
+        id="bubbleContainer"
+        class="flex p-2 rounded-lg bg-opacity-50"
+    >
+        <h1
+            id="bubbleMessage"
+            class="text-gray-900 text-sm font-bold"
+        >
+            Estamos en streaming
+        </h1>
+    </div>
 </body>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/brain.js"></script>
+<script src="/bubble.js"></script>
 </html>

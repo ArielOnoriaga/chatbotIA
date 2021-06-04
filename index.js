@@ -1,19 +1,20 @@
-const tmi = require('tmi.js');
 const express = require('express');
 const http = require('http');
+const tmi = require('tmi.js');
+const { Server } = require("socket.io");
 
 const app = express();
 const server = http.createServer(app);
 
+const io = new Server(server);
+
 app.get('/', (req, res) => {
-  res.send('<h1>Hello world</h1>');
+  res.sendFile(__dirname + '/index.html');
 });
 
-server.listen(3000, () => {
-  console.log('listening on *:3000');
-});
+app.use(express.static('public'));
 
-const { chatBubble } = require('./chatMessage');
+server.listen(3000);
 
 const tmiClient = new tmi.Client({
     channels: ['aonoriaga'],
@@ -21,7 +22,16 @@ const tmiClient = new tmi.Client({
 
 tmiClient.connect();
 
-tmiClient.on('message', (channel, tags, message, self) => {
-    console.log(channel, tags, message, self);
+tmiClient.on('message', (_, tags, message) => {
+    io.emit('newMessage', {
+        message,
+        tags
+    });
+
+    if(message.startsWith('!color')) {
+        const [ , color ] = message.split(' ');
+
+        io.emit('setColor', { color });
+    }
 });
 
