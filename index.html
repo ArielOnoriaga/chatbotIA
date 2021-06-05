@@ -8,11 +8,11 @@
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body
-    class="bg-transparent p-4 flex"
+    class="bg-transparent p-4 flex flex-col space-y-4"
 >
     <div
         id="bubbleContainer"
-        class="flex p-2 rounded-lg"
+        class="flex p-2 rounded-lg hidden"
     >
         <h1
             id="bubbleMessage"
@@ -21,9 +21,21 @@
             Estamos en streaming
         </h1>
     </div>
+
+    <div id="app" />
+
+    <audio
+        src="/tomaMate.mp3"
+        id="tomaMate"
+        autoplay="true"
+        mute="mute"
+    />
 </body>
 
+<script src="https://unpkg.com/vue@next"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/brain.js"></script>
-<script src="/bubble.js"></script>
+<script src="/training.js"></script>
+<script src="/app.js"></script>
+<script src="/mate.js"></script>
 </html>
